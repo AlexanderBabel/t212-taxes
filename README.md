@@ -7,42 +7,110 @@ This is a simple script that can help you with your tax statement. It's parsing 
 1. Clone/Download this repo
 2. Make sure you have NodeJS 14 or higher installed.
 3. Install the dependencies of this project. I recommend Yarn, but you can also use npm. Yarn: `yarn` NPM: `npm install`
-4. Create a directory called `csv` and put your CSV from Trading212 in this directory
-5. Edit the Config in the top of the script. You can find the script in `src/parse.ts`
-6. Start the script with `yarn start` or `npm run start`
+4. Start the script with `yarn parse --help` or `npm run parse -- --help` in order to see the script help output
+5. Run the script with the path to the csv as a parameter: `yarn parse <path to csv>` or `npm run parse -- <path to csv>`
 
-## Example output
+## Help output
 
 ```bash
-    CSV file: csv/2020.csv
+Usage: parse [options] <path-to-csv>
 
-    --------- Dividends ---------
+Prints out your profits and dividends from Trading212
 
-      ----- Dividends EUR -----
-      Dividends (Total): 25.0 EUR
+Arguments:
+  path-to-csv                         The path to the CSV that you downloaded from Trading212
+
+Options:
+  -c, --currency <currency>           The currency of your Trading212 account (choices: "EUR", "USD", "GBX", default: "EUR")
+  -co, --country-code <country code>  The country code (e.g. DE, UK) of the country you are in. (Only needed if you are using the domestic option) (default: "DE")
+  -d, --domestic                      Use this option if you want to show domestic profits and dividends separately (default: false)
+  -h, --help                          display help for command
+```
+
+## Example outputs
+
+Command: `yarn parse csv/2020.csv --country-code DE --currency EUR --domestic`
+
+```bash
+[CSV Parser] File: csv/2020.csv
+[CSV Parser] Parsed 100 rows
+
+      --------- Dividends ---------
+
+      ----- Domestic EUR Dividends -----
+      Dividends (Total): 25 EUR
       Dividends (Tax): 0 EUR
 
-      ----- Dividends USD -----
-      Dividends (Total): 50.0 EUR
-      Dividends (Tax): 10.0 EUR
 
-      ----- Dividends GBX -----
+      ----- Foreign EUR Dividends -----
       Dividends (Total): 0 EUR
       Dividends (Tax): 0 EUR
 
-    ------------ P/L ------------
+      ----- Foreign USD Dividends -----
+      Dividends (Total): 50 EUR
+      Dividends (Tax): 10 EUR
 
-      ----- P/L EUR -----
-      Profits: 100.0 EUR
-      Losses: -50.0 EUR
-      Total: 50.0 EUR
+      ----- Foreign GBX Dividends -----
+      Dividends (Total): 0 EUR
+      Dividends (Tax): 0 EUR
 
-      ----- P/L USD -----
-      Profits: 1000.0 EUR
-      Losses: -200.0 EUR
-      Total: 800.0 EUR
+      ------------ P/L ------------
 
-      ----- P/L GBX -----
+      ----- Domestic EUR P/L -----
+      Profits: 100 EUR
+      Losses: -50 EUR
+      Total: 50 EUR
+
+
+      ----- Foreign EUR P/L -----
+      Profits: 0 EUR
+      Losses: 0 EUR
+      Total: 0 EUR
+
+      ----- Foreign USD P/L -----
+      Profits: 1000 EUR
+      Losses: -200 EUR
+      Total: 800 EUR
+
+      ----- Foreign GBX P/L -----
+      Profits: 0 EUR
+      Losses: 0 EUR
+      Total: 0 EUR
+```
+
+Command: `yarn parse csv/2020.csv --country-code DE --currency EUR`
+
+```bash
+[CSV Parser] File: csv/2020.csv
+[CSV Parser] Parsed 100 rows
+
+      --------- Dividends ---------
+
+      ----- EUR Dividends -----
+      Dividends (Total): 25 EUR
+      Dividends (Tax): 0 EUR
+
+      ----- USD Dividends -----
+      Dividends (Total): 50 EUR
+      Dividends (Tax): 10 EUR
+
+      ----- GBX Dividends -----
+      Dividends (Total): 0 EUR
+      Dividends (Tax): 0 EUR
+
+      ------------ P/L ------------
+
+      ----- EUR P/L -----
+      Profits: 100 EUR
+      Losses: -50 EUR
+      Total: 50 EUR
+
+      ----- USD P/L -----
+      Profits: 1000 EUR
+      Losses: -200 EUR
+      Total: 800 EUR
+
+      ----- GBX P/L -----
       Profits: 0 EUR
       Losses: 0 EUR
       Total: 0 EUR
