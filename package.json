@@ -1,0 +1,20 @@
+{
+  "name": "t212_taxes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Alex Babel",
+  "type": "module",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "exchange-rates-api": "^1.0.2",
+    "fast-csv": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/exchange-rates-api": "^1.0.0",
+    "typescript": "^4.2.3"
+  },
+  "scripts": {
+    "start": "tsc && node build/parse.js"
+  }
+}
