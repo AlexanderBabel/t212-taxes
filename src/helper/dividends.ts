@@ -1,8 +1,6 @@
-import exchangeRates from "exchange-rates-api";
+import { convert } from "./exchanges.js";
 import { Currency, T212CsvEntry } from "./csv.js";
 import { round } from "./number.js";
-
-const { convert } = exchangeRates;
 
 async function getDividends(
   dividends: T212CsvEntry[],
